@@ -21,7 +21,6 @@ before_install:
   - "echo 'gem: --no-document' > ~/.gemrc"
   # Solves rainbow issue: https://github.com/sickill/rainbow/issues/48
   - gem update --system
-  -   before_install:
   # Solves must use Bundler 2 or greater issue: https://docs.travis-ci.com/user/languages/ruby/#bundler-20
   - gem install bundler
 
