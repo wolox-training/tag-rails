@@ -2,10 +2,6 @@ language: ruby
 rvm:
   - 2.4.0
 
-addons:
-  code_climate:
-    repo_token: 89943dcf9eece00c7e360730a4a6102b1ce29c1b9956186bf4801ad059169274
-
 env:
   global:
     - RUBY_GC_MALLOC_LIMIT=90000000
@@ -14,14 +10,11 @@ env:
 
 services:
   - postgresql
-  - redis-server
 
 before_install:
   - "echo '--colour' > ~/.rspec"
   - "echo 'gem: --no-document' > ~/.gemrc"
-  # Solves rainbow issue: https://github.com/sickill/rainbow/issues/48
   - gem update --system
-  # Solves must use Bundler 2 or greater issue: https://docs.travis-ci.com/user/languages/ruby/#bundler-20
   - gem install bundler
 
 before_script:
@@ -31,13 +24,7 @@ before_script:
   - bundle exec rake db:migrate
 
 script:
-  - bundle exec rspec spec -fd
   - bundle exec rubocop --require rubocop-rails app spec
-
-#notifications:
-#  email:
-#    recipients:
-#      - rails-bootstrap-dev@wolox.com.ar
 
 cache:
   bundler: true
