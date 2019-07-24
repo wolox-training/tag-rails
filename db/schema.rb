@@ -10,27 +10,27 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190724174249) do
+ActiveRecord::Schema.define(version: 20190724204750) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "genre"
-    t.string "author"
-    t.string "image"
-    t.string "title"
-    t.string "editor"
-    t.string "year"
+    t.string "genre", null: false
+    t.string "author", null: false
+    t.string "image", null: false
+    t.string "title", null: false
+    t.string "editor", null: false
+    t.string "year", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
   create_table "rents", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "book_id"
-    t.date "rent_start"
-    t.date "rent_end"
+    t.bigint "user_id", null: false
+    t.bigint "book_id", null: false
+    t.date "rent_start", null: false
+    t.date "rent_end", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["book_id"], name: "index_rents_on_book_id"
@@ -49,8 +49,8 @@ ActiveRecord::Schema.define(version: 20190724174249) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "first_name"
-    t.string "last_name"
+    t.string "first_name", null: false
+    t.string "last_name", null: false
     t.string "nickname"
     t.string "image"
     t.string "email"
