@@ -45,6 +45,7 @@ group :development, :test do
   gem 'rubocop', '~> 0.73.0'
   gem 'rubocop-rails', '~> 2.2.1'
   gem 'selenium-webdriver'
+  gem 'shoulda-matchers', '~> 4.1.1', require: false
 end
 
 group :development do
