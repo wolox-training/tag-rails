@@ -7,8 +7,9 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
   include DeviseTokenAuth::Concerns::User
 
-  validates :first_name, :last_name, :email, :password,
+  validates :first_name, :last_name, :email,
             presence: true
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
+  validates :password, presence: true, if: "id.nil?"
 end
