@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe Book do
-
   required_fields = Book.validators.first.attributes
 
   context 'with correctly typed required fields' do
