@@ -11,5 +11,5 @@ class User < ApplicationRecord
             presence: true
   validates :email, uniqueness: { case_sensitive: false }
   validates :password, confirmation: true
-  validates :password, presence: true, if: 'id.nil?'
+  validates :password, presence: true, if: proc { id.nil? }
 end
