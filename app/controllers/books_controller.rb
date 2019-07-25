@@ -1,9 +1,10 @@
 # frozen_string_literal: true
 
 class BooksController < ApplicationController
+  include Wor::Paginate
+
   def index
-    books = Book.all
-    render json: { books: books }, status: :ok
+    render_paginated Book
   end
 
   def show
