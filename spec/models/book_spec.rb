@@ -3,10 +3,10 @@
 require 'rails_helper'
 
 describe Book do
-  required_fields = Book.validators.first.attributes
+  required_fields = %i[genre author image title editor year]
 
   context 'with correctly typed required fields' do
-    subject { FactoryBot.build(:book) }
+    subject { build(:book) }
 
     it { is_expected.to be_valid }
 
@@ -21,7 +21,7 @@ describe Book do
 
   required_fields.each do |field|
     context "with missing #{field}" do
-      subject { FactoryBot.build(:book, field => nil) }
+      subject { build(:book, field => nil) }
 
       it { is_expected.to_not be_valid }
 
