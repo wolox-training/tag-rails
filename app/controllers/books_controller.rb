@@ -8,7 +8,6 @@ class BooksController < ApplicationController
   end
 
   def show
-    book = Book.find(params[:id])
-    render json: { book: book }, status: :ok
+    render json: Book.find(params[:id]), status: :ok
   end
 end
