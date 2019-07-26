@@ -4,7 +4,7 @@ class BooksController < ApplicationController
   include Wor::Paginate
 
   def index
-    render_paginated Book
+    render_paginated Book, each_serializer: BooksSerializer
   end
 
   def show
