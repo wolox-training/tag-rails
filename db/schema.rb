@@ -10,22 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20190726141701) do
+ActiveRecord::Schema.define(version: 20190726181130) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
   create_table "books", force: :cascade do |t|
-    t.string "genre", null: false
-    t.string "author", null: false
-    t.string "image", null: false
-    t.string "title", null: false
-    t.string "editor", null: false
-    t.string "year", null: false
+    t.string "genre"
+    t.string "author"
+    t.string "image"
+    t.string "title"
+    t.string "editor"
+    t.string "year"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rents_id"
-    t.index ["rents_id"], name: "index_books_on_rents_id"
   end
 
   create_table "rents", force: :cascade do |t|
@@ -51,8 +49,8 @@ ActiveRecord::Schema.define(version: 20190726141701) do
     t.datetime "confirmed_at"
     t.datetime "confirmation_sent_at"
     t.string "unconfirmed_email"
-    t.string "first_name", null: false
-    t.string "last_name", null: false
+    t.string "first_name"
+    t.string "last_name"
     t.string "nickname"
     t.string "image"
     t.string "email"
@@ -64,16 +62,12 @@ ActiveRecord::Schema.define(version: 20190726141701) do
     t.json "tokens"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "rents_id"
     t.index ["confirmation_token"], name: "index_users_on_confirmation_token", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["rents_id"], name: "index_users_on_rents_id"
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["uid", "provider"], name: "index_users_on_uid_and_provider", unique: true
   end
 
-  add_foreign_key "books", "rents", column: "rents_id"
   add_foreign_key "rents", "books"
   add_foreign_key "rents", "users"
-  add_foreign_key "users", "rents", column: "rents_id"
 end
