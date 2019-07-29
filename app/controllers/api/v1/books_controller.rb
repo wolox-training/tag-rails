@@ -3,7 +3,10 @@
 module Api
   module V1
     class BooksController < ApplicationController
+      include DeviseTokenAuth::Concerns::SetUserByToken
       include Wor::Paginate
+
+      before_action :authenticate_user!
 
       def index
         render_paginated Book, each_serializer: BooksSerializer
