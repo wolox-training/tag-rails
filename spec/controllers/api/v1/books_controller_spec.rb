@@ -2,5 +2,5 @@
 
 require 'rails_helper'
 
-RSpec.describe BooksController, type: :controller do
+RSpec.describe Api::V1::BooksController, type: :controller do
 end
