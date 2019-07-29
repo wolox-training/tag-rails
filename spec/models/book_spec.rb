@@ -6,7 +6,7 @@ describe Book do
   required_fields = %i[genre author image title editor year]
 
   context 'with correctly typed required fields' do
-    subject { build(:book) }
+    subject(:book) { build(:book) }
 
     it { is_expected.to be_valid }
 
@@ -14,19 +14,19 @@ describe Book do
       it { is_expected.to validate_presence_of(field) }
     end
 
-    it 'should save correctly' do
-      expect(subject.save).to be true
+    it 'saves correctly' do
+      expect(book.save).to be true
     end
   end
 
   required_fields.each do |field|
     context "with missing #{field}" do
-      subject { build(:book, field => nil) }
+      subject(:book) { build(:book, field => nil) }
 
-      it { is_expected.to_not be_valid }
+      it { is_expected.not_to be_valid }
 
-      it 'should not be save' do
-        expect(subject.save).to_not be true
+      it 'is not save' do
+        expect(book.save).not_to be true
       end
     end
   end
