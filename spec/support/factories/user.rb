@@ -8,6 +8,6 @@ FactoryBot.define do
     last_name { Faker::Name.last_name }
     password { alphanumeric_password }
     password_confirmation { alphanumeric_password }
-    email { Faker::Internet.email }
+    sequence(:email) { |n| "person#{n}@example.com" }
   end
 end
