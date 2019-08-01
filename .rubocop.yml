@@ -30,7 +30,9 @@ Style/FrozenStringLiteralComment:
 
 # rubocop-rspec custom configurations
 
-require: rubocop-rspec
+require:
+  - rubocop-rails
+  - rubocop-rspec
 
 Naming/VariableNumber:
   EnforcedStyle: snake_case
