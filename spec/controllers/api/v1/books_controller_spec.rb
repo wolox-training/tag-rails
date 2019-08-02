@@ -8,8 +8,9 @@ describe Api::V1::BooksController, type: :controller do
 
   describe 'GET #index' do
     context 'when fetching all books' do
+      let!(:books) { create_list(:book, 3) }
+
       before do
-        create_list(:book, 3)
         get :index
       end
 
@@ -18,8 +19,13 @@ describe Api::V1::BooksController, type: :controller do
       end
 
       it 'responds with books that include expected attributes' do
-        book = JSON.parse(response.body, symbolize_names: true)[:page].first
-        expect(book.to_json).to eq BooksSerializer.new(Book.find(book[:id])).to_json
+        response_books = JSON.parse(response.body, symbolize_names: true)[:page]
+
+        expected = ActiveModel::Serializer::CollectionSerializer.new(
+          books, serializer: BooksSerializer
+        ).to_json
+
+        expect(response_books.to_json).to eq expected
       end
 
       it 'responds with 200 status' do
