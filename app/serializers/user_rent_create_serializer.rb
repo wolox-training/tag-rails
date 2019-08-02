@@ -1,4 +1,7 @@
-class UserRentCreateSerializer < RentSerializer
+class UserRentCreateSerializer < ActiveModel::Serializer
+  attributes :id
+  attribute :rent_start, key: :from
+  attribute :rent_end, key: :to
   attribute :returned_at
   has_one :book
   has_one :user
@@ -10,7 +13,7 @@ class UserRentCreateSerializer < RentSerializer
     attribute :description
 
     def image_url
-      { url: object.image }
+      { url: object.image } unless object.image.nil?
     end
   end
 
@@ -20,7 +23,7 @@ class UserRentCreateSerializer < RentSerializer
                :unread_notifications_count
 
     def image_url
-      { url: object.image }
+      { url: object.image } unless object.image.nil?
     end
 
     def rents_counter
