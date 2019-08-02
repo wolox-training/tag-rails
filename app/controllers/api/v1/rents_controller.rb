@@ -12,14 +12,14 @@ module Api
       end
 
       def create
-        params.permit!
-
-        rent = params[:rent]
-        rent[:rent_start] = rent.delete(:from)
-        rent[:rent_end] = rent.delete(:to)
-
-        render json: Rent.create(rent),
+        render json: Rent.create(rent_params),
                serializer: UserRentCreateSerializer
+      end
+
+      private
+
+      def rent_params
+        params.require(:rent).permit(:user_id, :book_id, :from, :to)
       end
     end
   end
