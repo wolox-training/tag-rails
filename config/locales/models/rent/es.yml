@@ -1,0 +1,4 @@
+es:
+  rent:
+    rent_start: 'Comienzo del alquiler'
+    rent_end: 'Fin del alquiler'

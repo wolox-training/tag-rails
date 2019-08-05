@@ -1,0 +1,6 @@
+en:
+  rent_created:
+    subject: 'A new rent has been created!'
+    heading: 'Hello %{first_name}! Here are the details of your book rent!'
+    book_details: 'Book details'
+    rent_details: 'Rent details'

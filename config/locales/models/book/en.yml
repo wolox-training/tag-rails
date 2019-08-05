@@ -1,0 +1,9 @@
+en:
+  book:
+    title: 'Title'
+    author: 'Author'
+    genre: 'Genre'
+    editor: 'Publisher'
+    year: 'Year'
+    image: 'Image'
+    description: 'Description'

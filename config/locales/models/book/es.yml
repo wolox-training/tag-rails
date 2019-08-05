@@ -1,0 +1,9 @@
+es:
+  book:
+    title: 'Título'
+    author: 'Autor'
+    genre: 'Género'
+    editor: 'Editorial'
+    year: 'Año'
+    image: 'Imagen'
+    description: 'Descripción'
