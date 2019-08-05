@@ -3,7 +3,6 @@
 require 'rails_helper'
 
 describe Api::V1::BooksController, type: :controller do
-  include Wor::Paginate
   include_context 'with Authenticated User'
 
   describe 'GET #index' do

@@ -1,9 +1,6 @@
 module Api
   module V1
     class RentsController < ApplicationController
-      include DeviseTokenAuth::Concerns::SetUserByToken
-      include Wor::Paginate
-
       before_action :authenticate_user!
 
       def index
