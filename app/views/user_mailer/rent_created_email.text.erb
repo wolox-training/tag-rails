@@ -1,12 +1,14 @@
-Hello <%= @user.first_name.capitalize%>!
-Here are the details of your book rent!
+<%= t(:heading, scope: :rent_created, first_name: @user.first_name.capitalize) %>
 
-Book details:
-<% @book.attributes.each do |attribute| %>
-  <%= attribute[0].capitalize %>: <%= attribute[1] %>
+<%= t(:book_details, scope: :rent_created) %>
+<% @rent.book.as_json(except: %i[id created_at updated_at image]).each do |key,val| %>
+  <% unless val.nil? %>
+    <%= t(key, scope: :book) %>: <%= val %>
+  <% end %>
 <% end %>
 
-Rent details:
-  Date of creation:  <%= @rent.created_at %>
-  Rent start date:  <%= @rent.rent_start %>
-  Rent end date:  <%= @rent.rent_end %>
+<%= t(:rent_details, scope: :rent_created) %>
+
+<% @rent.as_json(only: %i[created_at rent_start rent_end]).each do |key,val| %>
+  <%= t(key, scope: :rent, default: t(key)) %>: <%= l(val, format: :long) %>
+<% end %>
