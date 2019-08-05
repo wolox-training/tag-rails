@@ -4,13 +4,18 @@ module Api
       before_action :authenticate_user!
 
       def index
-        render_paginated Rent.where(user_id: params[:user_id]),
+        render_paginated current_user.rents,
                          each_serializer: UserRentsSerializer
       end
 
       def create
-        render json: Rent.create(rent_params),
-               serializer: UserRentCreateSerializer
+        rent = Rent.new(rent_params)
+        if rent.save
+          render json: rent,
+                 serializer: UserRentCreateSerializer, status: :created
+        else
+          render plain: 'Error creating rent', status: :unprocessable_entity
+        end
       end
 
       private
