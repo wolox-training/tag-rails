@@ -4,12 +4,14 @@ module Api
       before_action :authenticate_user!
 
       def index
-        render_paginated current_user.rents,
+        render_paginated policy_scope(Rent),
                          each_serializer: UserRentsSerializer
       end
 
       def create
-        rent = Rent.new(rent_params)
+        rent = Rent.new(permitted_attributes(Rent))
+        authorize rent
+
         if rent.save
           UserMailer.with(rent: rent).rent_created_email.deliver_later
 
@@ -18,12 +20,6 @@ module Api
         else
           render plain: 'Error creating rent', status: :unprocessable_entity
         end
-      end
-
-      private
-
-      def rent_params
-        params.require(:rent).permit(:user_id, :book_id, :from, :to)
       end
     end
   end
