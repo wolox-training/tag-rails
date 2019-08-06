@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :rents, dependent: :destroy
+  has_many :book_suggestions, dependent: :destroy
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
