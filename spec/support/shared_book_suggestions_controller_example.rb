@@ -5,7 +5,7 @@ shared_examples 'book suggestion created successfully' do |user_id|
     post :create, params: { book_suggestion: JSON.parse(book_suggestion.to_json) }
   end
 
-  it 'saves the book_suggestion to the DB' do
+  it 'saves the book suggestion to the DB' do
     expect(BookSuggestion.where(
              book_suggestion.attributes.except('id', 'created_at', 'updated_at')
            )).to exist
