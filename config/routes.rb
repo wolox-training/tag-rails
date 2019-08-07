@@ -8,6 +8,8 @@ Rails.application.routes.draw do
       end
 
       resources :book_suggestions, only: [:create]
+
+      get 'book_information/:isbn', action: :book_information, controller: 'book_information'
     end
   end
 
