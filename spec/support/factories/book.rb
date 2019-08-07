@@ -7,6 +7,6 @@ FactoryBot.define do
     image { Faker::LoremPixel.image }
     title { Faker::Book.title }
     editor { Faker::Name.name }
-    year { Faker::Number.within(0..2019) }
+    year { Faker::Number.within(range: 0..2019) }
   end
 end
