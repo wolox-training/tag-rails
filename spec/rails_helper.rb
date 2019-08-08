@@ -17,6 +17,9 @@ require 'rspec/rails'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 require 'shoulda_matchers_helper'
 require 'wor/paginate/rspec'
+
+require 'webmock/rspec'
+WebMock.disable_net_connect!(allow_localhost: true)
 # The following line is provided for convenience purposes. It has the downside
 # of increasing the boot-up time by auto-requiring all files in the support
 # directory. Alternatively, in the individual `*_spec.rb` files, manually
