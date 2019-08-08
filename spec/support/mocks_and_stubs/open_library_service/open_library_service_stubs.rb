@@ -21,6 +21,10 @@ class OpenLibraryServiceStubs
         query:
           { bibkeys: 'IS:0385472579', format: 'json', jscmd: 'data' }
       )
-      .to_return status: :ok
+      .to_return(
+        status: :ok,
+        body: '{}',
+        headers: { 'content-type': ['application/json'] }
+      )
   end
 end
