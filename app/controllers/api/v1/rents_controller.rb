@@ -12,7 +12,6 @@ module Api
         rent = Rent.new(rent_params)
         if rent.save
           UserMailer.with(rent_id: rent.id).rent_created_email.deliver_later
-
           render json: rent,
                  serializer: UserRentCreateSerializer, status: :created
         else
