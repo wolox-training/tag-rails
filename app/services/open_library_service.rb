@@ -1,7 +1,9 @@
 class OpenLibraryService
   def retrieve_book_information(isbn)
-    url = "https://openlibrary.org/api/books?bibkeys=#{isbn}&format=json&jscmd=data"
-    response = HTTParty.get(url)
+    response = HTTParty.get(
+      'https://openlibrary.org/api/books',
+      query: { bibkeys: isbn, format: 'json', jscmd: 'data' }
+    )
 
     return { error: "Cannot find a book for provided ISBN: '#{isbn}'" } if response.empty?
 
