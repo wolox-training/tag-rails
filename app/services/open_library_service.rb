@@ -5,7 +5,7 @@ class OpenLibraryService
       query: { bibkeys: isbn, format: 'json', jscmd: 'data' }
     )
 
-    return { error: "Cannot find a book for provided ISBN: '#{isbn}'" } if response.empty?
+    return { error: "Cannot find a book for provided ISBN: '#{isbn}'" } if response.nil?
 
     book_information = JSON.parse(response.body)[isbn]
                            .deep_symbolize_keys
