@@ -1,7 +1,7 @@
 module Api
   module V1
     class RentsController < ApplicationController
-      before_action :authenticate_user!
+      before_action :authenticate_user!, :set_locale
 
       def index
         render_paginated current_user.rents,
@@ -17,6 +17,10 @@ module Api
         else
           render plain: 'Error creating rent', status: :unprocessable_entity
         end
+      end
+
+      def set_locale
+        I18n.locale = current_user&.locale || I18n.default_locale
       end
 
       private

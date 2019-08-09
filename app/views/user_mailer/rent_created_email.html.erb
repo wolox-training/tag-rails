@@ -4,22 +4,30 @@
   <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
 </head>
 <body>
-  <h1>Hello <%= @user.first_name.capitalize%>! Here are the details of your book rent!</h1>
+  <h1>
+    <%= t(:heading, scope: :rent_created, first_name: @user.first_name.capitalize) %>
+  </h1>
 
-  <h3>Book details</h3>
+  <h3>
+    <%= t(:book_details, scope: :rent_created) %>
+  </h3>
+
   <ul>
-    <% @book.attributes.each do |attribute| %>
-      <li>
-      <b><%= attribute[0].capitalize %></b>: <%= attribute[1] %>
-      </li>
+    <% @rent.book.as_json(except: %i[id created_at updated_at image]).each do |key,val| %>
+      <% unless val.nil? %>
+        <li> <%= t(key, scope: :book) %>: <%= val %> </li>
+      <% end %>
     <% end %>
   </ul>
 
-  <h3>Rent details</h3>
+  <h3>
+    <%= t(:rent_details, scope: :rent_created) %>
+  </h3>
+
   <ul>
-    <li>Date of creation:  <%= @rent.created_at %> </li>
-    <li>Rent start date:  <%= @rent.rent_start %> </li>
-    <li>Rent end date:  <%= @rent.rent_end %> </li>
+    <% @rent.as_json(only: %i[created_at rent_start rent_end]).each do |key,val| %>
+      <li> <%= t(key, scope: :rent, default: t(key)) %>: <%= l(val, format: :short) %> </li>
+    <% end %>
   </ul>
 
 </body>

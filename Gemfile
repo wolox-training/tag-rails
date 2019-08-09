@@ -65,3 +65,4 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'active_model_serializers', '~> 0.10.0'
 gem 'wor-paginate', '~> 0.1.4'
 gem 'sidekiq', '~> 5.2.7'
+gem 'rails-i18n', '~> 5.1'
