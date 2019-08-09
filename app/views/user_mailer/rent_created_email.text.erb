@@ -1,0 +1,12 @@
+Hello <%= @user.first_name.capitalize%>!
+Here are the details of your book rent!
+
+Book details:
+<% @book.attributes.each do |attribute| %>
+  <%= attribute[0].capitalize %>: <%= attribute[1] %>
+<% end %>
+
+Rent details:
+  Date of creation:  <%= @rent.created_at %>
+  Rent start date:  <%= @rent.rent_start %>
+  Rent end date:  <%= @rent.rent_end %>

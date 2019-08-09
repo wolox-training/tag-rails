@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+  <h1>Hello <%= @user.first_name.capitalize%>! Here are the details of your book rent!</h1>
+
+  <h3>Book details</h3>
+  <ul>
+    <% @book.attributes.each do |attribute| %>
+      <li>
+      <b><%= attribute[0].capitalize %></b>: <%= attribute[1] %>
+      </li>
+    <% end %>
+  </ul>
+
+  <h3>Rent details</h3>
+  <ul>
+    <li>Date of creation:  <%= @rent.created_at %> </li>
+    <li>Rent start date:  <%= @rent.rent_start %> </li>
+    <li>Rent end date:  <%= @rent.rent_end %> </li>
+  </ul>
+
+</body>
+</html>
