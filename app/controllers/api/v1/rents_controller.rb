@@ -4,12 +4,14 @@ module Api
       before_action :authenticate_user!, :set_locale
 
       def index
-        render_paginated current_user.rents,
+        render_paginated policy_scope(Rent),
                          each_serializer: UserRentsSerializer
       end
 
       def create
-        rent = Rent.new(rent_params)
+        rent = Rent.new(permitted_attributes(Rent))
+        authorize rent
+
         if rent.save
           UserMailer.with(rent_id: rent.id).rent_created_email.deliver_later
           render json: rent,
