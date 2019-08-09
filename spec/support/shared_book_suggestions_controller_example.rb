@@ -2,7 +2,7 @@ shared_examples 'book suggestion created successfully' do |user_id|
   let!(:book_suggestion) { build(:book_suggestion, user_id: user_id) }
 
   before do
-    post :create, params: { book_suggestion: JSON.parse(book_suggestion.to_json) }
+    post :create, params: { book_suggestion: book_suggestion.attributes }
   end
 
   it 'saves the book suggestion to the DB' do
