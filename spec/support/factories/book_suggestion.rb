@@ -7,6 +7,6 @@ FactoryBot.define do
     link { Faker::Internet.url }
     editor { Faker::Book.publisher }
     year { Faker::Number.within(range: 0..2019) }
-    association :user, factory: :user
+    user
   end
 end
