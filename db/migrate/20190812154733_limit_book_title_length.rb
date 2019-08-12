@@ -9,6 +9,6 @@ class LimitBookTitleLength < ActiveRecord::Migration[5.1]
   end
 
   def down
-    change_column :books, :title, :string, limit: 255
+    change_column :books, :title, :string, limit: nil
   end
 end
