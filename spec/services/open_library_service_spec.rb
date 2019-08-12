@@ -14,7 +14,7 @@ describe OpenLibraryService, type: :service do
       end
 
       it 'makes an external request' do
-        expect(a_request(:get, 'https://openlibrary.org/api/books')
+        expect(a_request(:get, 'openlibrary.org/api/books')
                 .with(query: { bibkeys: valid_isbn, format: 'json', jscmd: 'data' }))
           .to have_been_made
       end
@@ -38,7 +38,7 @@ describe OpenLibraryService, type: :service do
       end
 
       it 'makes and external request' do
-        expect(a_request(:get, 'https://openlibrary.org/api/books')
+        expect(a_request(:get, 'openlibrary.org/api/books')
                 .with(query: { bibkeys: invalid_isbn, format: 'json', jscmd: 'data' }))
           .to have_been_made
       end
