@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+  rescue_from ActiveRecord::InvalidForeignKey, with: :invalid_foreign_key
 
   private
 
@@ -18,5 +19,9 @@ class ApplicationController < ActionController::Base
 
   def user_not_authorized
     render plain: 'You are not authorized to perform this action.', status: :unauthorized
+  end
+
+  def invalid_foreign_key
+    render plain: 'There was an error with one of the foreign attributes sent', status: 422
   end
 end

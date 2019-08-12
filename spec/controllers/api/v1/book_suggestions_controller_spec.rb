@@ -17,9 +17,12 @@ describe Api::V1::BookSuggestionsController, type: :controller do
     context 'when creating a book suggestion for a non existing user' do
       let!(:book_suggestion) { build(:book_suggestion, user_id: 456) }
 
-      it 'raises an invalid foreign key error' do
-        params = { book_suggestion: JSON.parse(book_suggestion.to_json) }
-        expect { post :create, params: params }.to raise_error(ActiveRecord::InvalidForeignKey)
+      before do
+        post :create, params: { book_suggestion: JSON.parse(book_suggestion.to_json) }
+      end
+
+      it 'responds with unprocessable entity status' do
+        expect(response).to have_http_status :unprocessable_entity
       end
     end
 
