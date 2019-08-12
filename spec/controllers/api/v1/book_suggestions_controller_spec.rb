@@ -24,10 +24,10 @@ describe Api::V1::BookSuggestionsController, type: :controller do
 
     %i[author title link editor year].each do |required_field|
       context "when creating a book suggestion with missing #{required_field}" do
-        let!(:book_suggestion) { build(:book_suggestion, required_field => nil) }
+        let!(:book_suggestion) { attributes_for(:book_suggestion, required_field => nil) }
 
         before do
-          post :create, params: { book_suggestion: JSON.parse(book_suggestion.to_json) }
+          post :create, params: { book_suggestion: book_suggestion }
         end
 
         it 'responds with unprocessable entity status' do
