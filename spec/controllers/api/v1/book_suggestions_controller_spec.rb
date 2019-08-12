@@ -3,15 +3,11 @@ require 'rails_helper'
 describe Api::V1::BookSuggestionsController, type: :controller do
   describe 'POST #create' do
     context 'when creating a book suggestion with required attributes for an existing user' do
-      before do
-        create(:user, id: 1)
-      end
-
-      include_examples 'book suggestion created successfully', 1
+      include_examples 'book suggestion created successfully', true
     end
 
     context 'when creating a book suggestion with required attributes for a guest user' do
-      include_examples 'book suggestion created successfully', nil
+      include_examples 'book suggestion created successfully', false
     end
 
     context 'when creating a book suggestion for a non existing user' do

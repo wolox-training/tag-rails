@@ -1,5 +1,11 @@
-shared_examples 'book suggestion created successfully' do |user_id|
-  let!(:book_suggestion) { build(:book_suggestion, user_id: user_id) }
+shared_examples 'book suggestion created successfully' do |create_user|
+  FactoryBot.use_parent_strategy = false
+
+  if create_user
+    let!(:book_suggestion) { build(:book_suggestion) }
+  else
+    let!(:book_suggestion) { build(:book_suggestion, user: nil) }
+  end
 
   before do
     post :create, params: { book_suggestion: book_suggestion.attributes }
