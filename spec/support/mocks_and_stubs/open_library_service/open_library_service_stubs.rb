@@ -4,7 +4,7 @@ class OpenLibraryServiceStubs
   include WebMock::API
 
   def book_information_request_success
-    stub_request(:get, 'https://openlibrary.org/api/books')
+    stub_request(:get, 'openlibrary.org/api/books')
       .with(
         query:
           { bibkeys: 'ISBN:0385472579', format: 'json', jscmd: 'data' }
@@ -16,7 +16,7 @@ class OpenLibraryServiceStubs
   end
 
   def book_information_request_error
-    stub_request(:get, 'https://openlibrary.org/api/books')
+    stub_request(:get, 'openlibrary.org/api/books')
       .with(
         query:
           { bibkeys: 'IS:0385472579', format: 'json', jscmd: 'data' }
