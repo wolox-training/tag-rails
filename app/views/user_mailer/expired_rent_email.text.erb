@@ -1,0 +1,15 @@
+<%= t(:heading, scope: :expired_rent, first_name: @user.first_name.capitalize) %>
+
+<%= t(:book_details) %>
+
+<% @expired_rent.book.as_json(except: %i[id created_at updated_at image]).each do |key,val| %>
+  <% unless val.nil? %>
+    <%= t(key, scope: :book) %>: <%= val %>
+  <% end %>
+<% end %>
+
+<%= t(:rent_details) %>
+
+<% @expired_rent.as_json(only: %i[created_at rent_start rent_end]).each do |key,val| %>
+  <%= t(key, scope: :rent, default: t(key)) %>: <%= l(val, format: :short) %>
+<% end %>

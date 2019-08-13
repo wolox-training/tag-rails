@@ -1,6 +1,9 @@
 en:
+  book_details: 'Details of your book'
+  rent_details: 'Details of your rent'
   rent_created:
     subject: 'A new rent has been created!'
     heading: 'Hello %{first_name}! Here are the details of your book rent!'
-    book_details: 'Details of your book'
-    rent_details: 'Details of your rent'
+  expired_rent:
+    subject: 'Your rent expires today!'
+    heading: 'Hello %{first_name}! We inform you that your book rent expires today.'

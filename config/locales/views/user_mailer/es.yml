@@ -1,6 +1,9 @@
 es:
+  book_details: 'Datos del libro'
+  rent_details: 'Datos del alquiler'
   rent_created:
     subject: 'Se creo un nuevo alquiler!'
     heading: 'Hola %{first_name}! Acá te dejamos los detalles de tu alquiler de libro!'
-    book_details: 'Datos del libro'
-    rent_details: 'Datos del alquiler'
+  expired_rent:
+    subject: 'Hoy termina tu alquiler de libro!'
+    heading: 'Hola %{first_name}! Te informamos que hoy finaliza tu alquiler de libro.'
