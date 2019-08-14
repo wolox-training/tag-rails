@@ -1,5 +1,7 @@
 class OpenLibraryService
   include HTTParty
+  include Wprof
+
   base_uri 'openlibrary.org'
 
   def options(isbn)
