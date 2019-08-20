@@ -9,11 +9,11 @@ services:
     image: redis
     command: redis-server
     volumes:
-      - 'redis:/data'
+      - redis:/data
 
   web:
     build: .
-    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    command: bash -c "bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
       - .:/myapp
     ports:
@@ -28,12 +28,12 @@ services:
 
   sidekiq:
     depends_on:
-      - 'postgres'
-      - 'redis'
+      - postgres
+      - redis
     build: .
     command: sidekiq -C config/sidekiq.yml
     volumes:
-      - '.:/app'
+      - .:/myapp
     environment:
       - REDIS_URL=redis://redis:6379/0
       - PGHOST=postgres
