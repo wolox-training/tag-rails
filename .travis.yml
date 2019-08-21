@@ -7,9 +7,13 @@ env:
     - RUBY_GC_MALLOC_LIMIT=90000000
     - RUBY_GC_HEAP_FREE_SLOTS=200000
     - SECURITY_SECRET_TOKEN=traviscitraviscitraviscitraviscitravisci
+    - secure: Y4ncfUZoAi2ksjLYtZKwHhpevYY/3K0zX8nAbaiurPqDdtypLkbsQmmMbGI4TXW0qJpkzirl3H8soHEGbdOZfsjMk7G/PC5/5cl7xxIrZIOk8hpQObC0ND+vmBAP4hC4UxglLZ1IWHqKB1CUcECgiZEO7fpKnyrrzyovo6Ulu+R+mSQ5X5J+zjV1l2KuwZyduaj4GnLUfRAB73YIh751DxvJ7hScDlzF+oPGDoP7Xlc22tw9WXqMKWwct04l1PHcQgttRYortk2GgDr2XV0C+8H5ZAaZQd0Q3tkWpP6YHmbTSqyGxXbfWcTxrC6qEKPh1DyRq+Aigjk69Wf6WKPTrldIq8SWhOa6QKm9LTFGS/QEWchmEhhmQEvCFPqeAIw/Uw6/2ArimN6Ue+LM3ZlQtmRgd/KO4ax8kFCe9w1Tc0xWFc/j3zhm4F6W7+a0AqlA3/g9HZEsHGuImh1EHQ1j3puRbwpvD1GpVgV9nVG3iTNajokjRxrdXO+5aOMmLEOXR2VGZwFpgO2rS9onWAz+15juiqHg65GMiOJgaJCqVYDQ9pZrigw6I0KJX/fHJ7Fdpq0Hwt/BCDQIy+KubWogy38NUrT5oPKifd7gxnxQLEi64lNUNaQpW0PbttgnHM88+C3UfEuUuog+eDGP686pbXyoraMI+rtTd0EudJv/NLw=
+    - secure: jJSwmtaS5cY0imzSuYVx/vJ3XjNMAV1MgQSjMTo643o4h3YB0EZH/k5X8XZRIm0v/TzpHMytDAu73oqWoSC/x5CYbTagn6hviia3rnaqqywaVK3WUnuXY4QfxCA4E7Ydc442Zceo9BAYah4mwMW1TCxhiCGWTL/rGo8KL8jPJi600tK7DMmPtVAgxFAXKg4ISOnNaHZt9AdZAFNJPD2cpBGI5LWoe4gwZN5mIAciTPGo7GdEohhgtTXBd2B5gTrQGBdAwvghy/vPfL4cD4yuIS9Pg92sMWjDSe5pzm7ZLGI7bQpoBQAzQd9Gx0l2pcOb8lzZT3ONDUKxJHb+t9ySvZ5ACOj/I1Uvqf11NwwsSm/VIVA+DMaxwJLVNdEfQmTY+skisZemP9oUvdT2UT7ZY33a/QD0rLzOastzP9O4QzuMRSAPZDdZMQKYKDS46gffRyHjcFCvqE0yOwOkxEkyAi6Z9tlZkYxvRO4Dw7tBuPDMxQ/DXf13Cj9X6Zgj+ciUh85lIvaUUarJyyKJjOKTs8CtJ58G3Wb+Wk1n8OwIx2+D38Z7aP5KOO4LQO/iEHKvcmueK+JTrZCKiXsjR9Ri0z4xpIMSpuAQ5TBIjedSupaLCsIPDcybngQNQGGbOO2SaG/tiUnkzhrRHfYhOfiuJsaUODwKcc1qRsmQ5hjJXAg=
+    - secure: aXEWDYBlLUIfy8fK5F4SnhjO/bOYk8LPT08ipb/Ml21+iJmOlC9tFfODSI/fJL819C78pUkTR0pKNh9yRDUUDGPjlzc4/WvbEIWUQ5p+MZnc8Sdqs2FJGpmSo0MowJUUZAjGlfMI2teoilcWQR6qjqBpzPsPluIA/rGJdmUUd/Bl3a50oKqlX8jWG6X/HRab3fQenqKRApxh9/mbrhpP+1fjZ6ajB1qCOuaeSG8lYhDWPD9Jw7qejepB9p7wEUOMMjOUWR+T1OCUvQM+FLQSEbb6Lq+VfZeEOfZy00NRsu0K9tqFo7+jO5JOxdXD8qCQ4xBfMzHQU24HoLKiNCW6MdDxqaF5EhDgDGlcP/3iduZ+ejpkorXPQTzwrxXiSSk2tnVjZAYzwiAiWoNIE6RKEML+3Yr6j8q6Re5OtRTacLNCnHc3My/aNjZc+zQIPv8EsqrgS/RzBASqylrBM6oDiF7CfFDFb7kfHnIQ4C6u/wUgpUubhlwi5D+Ubh1SBvCvRwCSGGHcXNYkH9qWa15tM9kvVs/oTXvQTsmosigRE8zR5iwb0bfc8ybBW49U+RknAixqh+7U5Cp41ZafEKSSPIz6xIcGl8MCrOysUArzb/WXUWha8vbPovjy1bcR4Ze1zpCtsISkoIGss3QY0g3xWfJtR6cEUsY1KF7lJtyIWc8=
 
 services:
   - postgresql
+  - docker
 
 before_install:
   - "echo 'gem: --no-document' > ~/.gemrc"
@@ -25,6 +29,8 @@ before_script:
 script:
   - bundle exec rubocop --require rubocop-rails app spec
   - bundle exec rspec spec -fd
+  - docker tag tag-wbooks-api:latest $DOCKER_HUB_USERNAME/tag-wbooks-api:production
+  - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api:production
 
 cache:
   bundler: true
