@@ -30,8 +30,8 @@ script:
   - bundle exec rubocop --require rubocop-rails app spec
   - bundle exec rspec spec -fd
   - docker build -t tag-wbooks-api:latest .
-  - docker tag tag-wbooks-api:latest $DOCKER_HUB_USERNAME/tag-wbooks-api:production
-  - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api:production
+  - docker tag tag-wbooks-api:latest $DOCKER_HUB_USERNAME/tag-wbooks-api
+  - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api
 
 cache:
   bundler: true
