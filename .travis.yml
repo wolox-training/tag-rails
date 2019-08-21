@@ -28,3 +28,11 @@ script:
 
 cache:
   bundler: true
+
+deploy:
+  api_key:
+    secure: UhuyTDow0aMIEsN2168yO1bECCaDFmKEmUWgHRjPqQ5DcteMApIhtOhRqJdO5JOPMggW0cVNWJRlg/qesgUJlHmaLVE/P57k3GU9GewPUslOvhrp++4lTbH96rMilhnGcPo/ffO926TbSJYov2LkswfSvdShZr6h6tqtjHauF5BEOrcnAKF9ZheZCsZAQYzv25bZsJthiwLw/PQ42DBD0ao/kezCVxmYsx7mngqiGVj/gNLiD14mFDq7E6PNWf8WQefNjnm0ysLbfMm/RpVzMtDfXU6npl5jfp3Alf75BZh6l/KKxhV52Y8k3yy0rq7noAsZHqZBmf93w4SBC8aR1e6aCuqalLaCaplma1btO2p6Ejo3RhNnV8ptit9g39+dYsecBzsw0KF5MD1C/7JBR0OPEe9hUYF8hxIcJWmRaWjtkJqLnknGb0eviYMvzwS2pV2BnhrHIVVWXTk9VJ/afYK8c0nhLF6ONq//m6tgjypFAapfnKvA/3SQSE9DuzjKoU7zL7hMo0t4aEzsAXb36KORleRT2V5FzVN8mccPzNpAlz36AL10YDxD0btZrRrBojDMSnTDW1MjpFaKwly6L+F+O84dOh++z0AIq3y7aab4kxHn1HXrLtnz0nr0r/t3TqanKjU/JIQf06JrN50SfMArKf8Ps/UMdfrOHLpeRHo=
+  provider: heroku
+  on: travis-docker-heroku
+  app: tag-wbooks-api
+  run: rake db:migrate
