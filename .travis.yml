@@ -29,6 +29,7 @@ before_script:
 script:
   - bundle exec rubocop --require rubocop-rails app spec
   - bundle exec rspec spec -fd
+  - docker build .
   - docker tag tag-wbooks-api:latest $DOCKER_HUB_USERNAME/tag-wbooks-api:production
   - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api:production
 
