@@ -31,6 +31,7 @@ script:
   - bundle exec rspec spec -fd
   - docker build -t tag-wbooks-api:latest .
   - docker tag tag-wbooks-api:latest $DOCKER_HUB_USERNAME/tag-wbooks-api
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
   - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api
 
 cache:
