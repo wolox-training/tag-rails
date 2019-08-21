@@ -7,9 +7,12 @@ env:
     - RUBY_GC_MALLOC_LIMIT=90000000
     - RUBY_GC_HEAP_FREE_SLOTS=200000
     - SECURITY_SECRET_TOKEN=traviscitraviscitraviscitraviscitravisci
+    - secure: "IsSFdTEQ8O9xRo8++nudSusyl+Sa+mt3UDjeccDkTzdjwABc2v0IqPPzikFo4Q6l1bQOtfUsq9Em332U9KO3sUdEbQlLBzGOfHRWhkII2MKir7tNwN15T/rSwrn8HaIAoBmi9ofIt/MDwzDJdFbDIxwqvhtAHeacm32679LWG9eanjn5HPfMsrUbO0iBExYrVcE+VKgyfKIxiD/ywKPjQTUapREfVM6oTC0FTOUSiv6AlRHrgMcuCsbIQgNyr7CQYshb8EhRrWH0f4FgaFa2pbnexfWOGhzk44xKwrW4X7O93KFv/PmAwK2QP1jbRIEe/Kqq1xfjvkRrtLE6si6WfraVo4TSxdH/qV5irn0eF4HPOLdJW3JJywScF2VzwUrUJA50WF1smTdmdBNjHUI0gqOhYn0lEnrJHCyvOXvfeBAVaM0lxdQaXYSSvqYozvSS5L73zU5PILl9rJsxVg7vJjVe+v+rfC7v6JdoOXHqXL3AQqeQnTL5Q3WFIW2VnihxBzWuLwYzVPaybh+4c3pVoCXoAe7t7ZpdBhi/hVx3TeojgDTXuAC5IkG/uK98AzlJf/vqbwhwmFLKurnTfOEhtVKsFh13tANNgQfar2CmHXZjUgGpAyOjUxP0P4jGvI6gFM4xG6j546Ixlaj7LLzYjgP530JfXIigZwjfMr3RJdw="
+    - secure: "xU66k2mgk4BH+6fpEgzWcWXgsdFwJYH5gudCpkUnnEJfO1wH5eRaORKBhOZQQAwK9raq50JE+WXZi9knjXSYJ+TPvVdOb8MNQQNxqZVAam5QA+NdJ+5zT45d67Hh0CsT7Mk2kHcoxFdYo0VSMbDTbr6Oq4mbxDuYocY+KrT1ibL0Ovy9Zh6ClQ6GrivMPsxn7/so9VCJe+vy6TDOhgClflKz3Wt2NInbiBjkailLBFzeVHAOhpYnD/o7Nia1rM+M+A2wtcJ2g5tuoW6XpAHeV1EztrrKwI5v82mgIaak0LfTfpeBeRIUH2CZhdGkRWg3QqvLa99zw5wkvFiNRnUVJQ1/YPEdj8Jjy5QP7pCyxdqjc5xWV1xD0b8PlbIB4NmZgbES5naV8Y9G9nxlaQJVBHgtt5e2IefndHvW9caQD0nE0JtEvp0oeB2KhpusAPcbWI1j/9yd/P/A9iBmG+UhJJO0yHQAOqNms1Asme3R/N2bkI4PlrvgJNNsxMbjzkbpfDYcUKn0RPkjo5Kh882OGK2wYqHT6jRqwpZLizOmXyo8KM/jB97tcpJSFzyVQNFgUycnTWIFVJqy11Onp9g3S995hj9MhmEJWUnDpCmCBp88ieYjXM+GfmhH/2JnHAFVB/bn747705lu5f/KGjhydP5nHqbBSRiEusr8OFcC9xY="
 
 services:
   - postgresql
+  - docker
 
 before_install:
   - "echo 'gem: --no-document' > ~/.gemrc"
@@ -25,6 +28,16 @@ before_script:
 script:
   - bundle exec rubocop --require rubocop-rails app spec
   - bundle exec rspec spec -fd
+  - docker build -t $DOCKER_HUB_USERNAME/tag-wbooks-api .
+  - echo "$DOCKER_HUB_PASSWORD" | docker login -u "$DOCKER_HUB_USERNAME" --password-stdin
+  - docker push $DOCKER_HUB_USERNAME/tag-wbooks-api
 
 cache:
   bundler: true
+
+deploy:
+  api_key:
+    secure: UhuyTDow0aMIEsN2168yO1bECCaDFmKEmUWgHRjPqQ5DcteMApIhtOhRqJdO5JOPMggW0cVNWJRlg/qesgUJlHmaLVE/P57k3GU9GewPUslOvhrp++4lTbH96rMilhnGcPo/ffO926TbSJYov2LkswfSvdShZr6h6tqtjHauF5BEOrcnAKF9ZheZCsZAQYzv25bZsJthiwLw/PQ42DBD0ao/kezCVxmYsx7mngqiGVj/gNLiD14mFDq7E6PNWf8WQefNjnm0ysLbfMm/RpVzMtDfXU6npl5jfp3Alf75BZh6l/KKxhV52Y8k3yy0rq7noAsZHqZBmf93w4SBC8aR1e6aCuqalLaCaplma1btO2p6Ejo3RhNnV8ptit9g39+dYsecBzsw0KF5MD1C/7JBR0OPEe9hUYF8hxIcJWmRaWjtkJqLnknGb0eviYMvzwS2pV2BnhrHIVVWXTk9VJ/afYK8c0nhLF6ONq//m6tgjypFAapfnKvA/3SQSE9DuzjKoU7zL7hMo0t4aEzsAXb36KORleRT2V5FzVN8mccPzNpAlz36AL10YDxD0btZrRrBojDMSnTDW1MjpFaKwly6L+F+O84dOh++z0AIq3y7aab4kxHn1HXrLtnz0nr0r/t3TqanKjU/JIQf06JrN50SfMArKf8Ps/UMdfrOHLpeRHo=
+  provider: heroku
+  app: tag-wbooks-api
+  run: rake db:migrate
