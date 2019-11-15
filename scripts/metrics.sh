@@ -12,7 +12,7 @@ code_coverage=$(echo "${rspec_output}" | grep "Coverage report" | cut -d "(" -f2
 
 # rubycritic
 echo "Running rubycritic for code quality score..."
-rubycritic_output=$(bundle exec rubycritic --no-browser | tee /dev/tty)
+rubycritic_output=$(bundle exec rubycritic app lib --no-browser | tee /dev/tty)
 code_quality=$(echo "${rubycritic_output}" | grep Score | cut -d " " -f2)
 
 # rake environment
