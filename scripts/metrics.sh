@@ -1,3 +1,9 @@
+# Check if directory has a Gemfile
+if ! ls | grep Gemfile > /dev/null  ; then
+  echo "Project is not a Ruby On Rails project"
+  exit
+fi
+
 # bundle install
 echo "Running bundle install to calculate number of dependencies..."
 bundle_output=$(bundle install | tee /dev/tty)
