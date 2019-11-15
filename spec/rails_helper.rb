@@ -17,6 +17,8 @@ require 'rspec/rails'
 # option on the command line or in ~/.rspec, .rspec or `.rspec-local`.
 require 'shoulda_matchers_helper'
 require 'wor/paginate/rspec'
+require 'simplecov'
+SimpleCov.start
 
 require 'webmock/rspec'
 WebMock.disable_net_connect!(allow_localhost: true)

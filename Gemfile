@@ -31,6 +31,7 @@ gem 'jbuilder', '~> 2.5'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem 'devise_token_auth', '~> 1.1.0'
+gem 'rubycritic', require: false
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -48,6 +49,7 @@ group :development, :test do
   gem 'rubocop-rspec', '~> 1.34.0'
   gem 'selenium-webdriver'
   gem 'shoulda-matchers', '~> 4.1.1'
+  gem 'simplecov'
 end
 
 group :development do
